@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing kubectl...
+      - curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.21.2/2021-07-05/bin/linux/amd64/kubectl
+      - chmod +x ./kubectl
+      - mv ./kubectl /usr/local/bin/
+      - echo Updating kubeconfig...
+      - aws eks update-kubeconfig --name $CLUSTER_NAME --region $AWS_DEFAULT_REGION
+
+  build:
+    commands:
+      - echo Applying Kubernetes manifests...
+      - kubectl apply -f ./infrastructure/k8s/deployment.yaml  # Укажите путь к манифестам
+      - kubectl apply -f ./infrastructure/k8s/service.yaml

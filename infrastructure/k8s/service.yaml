@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+  labels:
+    app: myapp
+spec:
+  type: LoadBalancer  # Внешний доступ через AWS Load Balancer
+  ports:
+    - port: 80
+      targetPort: 8080  # Порт, на который направляется трафик внутри контейнера
+  selector:
+    app: myapp
