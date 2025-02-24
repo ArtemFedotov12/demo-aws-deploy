@@ -14,7 +14,7 @@ public class TestController {
 
     @GetMapping("/test")
     String test() {
-        return "some45";
+        return "some46";
     }
 
     @PostMapping("/dto")
